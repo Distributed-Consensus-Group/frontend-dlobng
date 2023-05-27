@@ -1,0 +1,29 @@
+<div class="row h-100 align-items-center justify-content-center">
+	<div class="col-md-8 col-lg-5 col-xl-4">
+		<!--Logo-->
+		<a href="index.html"
+		   class="d-flex position-relative mb-4 z-index-1 align-items-center justify-content-center">
+                                        <span class="sidebar-icon size-60 bg-gradient-primary text-white rounded-3">
+                                           <b class="fw-bolder fs-3">D</b>
+                                        </span>
+		</a>
+		<!--Card-->
+		<div class="card card-body p-4">
+			<h4 class="text-center">Connect With Your Mobile Wallet</h4>
+			<p class="mb-4 text-center text-muted">
+				Scan the QR to connect your mobile wallet.
+			</p>
+			<img [src]="state().modal.QRCodeImg" class="w-50 h-50 mx-auto d-block">
+			<hr class="mt-4">
+			<h4 class="text-center">Connect With Your Desktop Wallet</h4>
+			<p class="mb-4 text-center text-muted">
+				Choose your installed desktop wallet.
+			</p>
+			<div *ngFor="let wallet of desktopWallets()">
+				<button class="w-100 btn btn-lg btn-primary mt-3 mb-3"
+				        (click)="dispatchWallet(wallet)"
+				        type="button">{{wallet.title}}</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/frontend-dlobng",
             "index": "src/index.html",
@@ -22,20 +22,59 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets/fonts/bootstrap-icons/fonts",
+              "src/assets/media"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css",
+              "src/assets/fonts/bootstrap-icons/bootstrap-icons.css",
+              "src/assets/vendor/css/simplebar.min.css",
+              "src/assets/vendor/css/choices.min.css",
+              "src/assets/css/style.min.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "./custom-webpack-config.js"
+            },
+            "allowedCommonJsDependencies": [
+              "@babel/runtime/regenerator",
+              "@grpc/grpc-js",
+              "@provenanceio/walletconnect-js/lib/service",
+              "@provenanceio/walletconnect-js/lib/types",
+              "@tendermint/belt",
+              "@walletconnect/client",
+              "@walletconnect/environment",
+              "@walletconnect/socket-transport",
+              "@walletconnect/types",
+              "@walletconnect/window-getters",
+              "@walletconnect/window-metadata",
+              "base64url",
+              "buffer",
+              "bn.js",
+              "crypto",
+              "crypto-browserify",
+              "crypto-js",
+              "events",
+              "google-protobuf/google/protobuf/any_pb",
+              "google-protobuf/google/protobuf/timestamp_pb",
+              "hoist-non-react-statics",
+              "is-typedarray",
+              "js-sha3",
+              "qrcode",
+              "query-string",
+              "secp256k1",
+              "stream-browserify",
+              "typedarray-to-buffer"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "750kb",
+                  "maximumError": "1.5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -57,7 +96,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
               "browserTarget": "frontend-dlobng:build:production"
@@ -69,13 +108,13 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular-builders/custom-webpack:extract-i18n",
           "options": {
             "browserTarget": "frontend-dlobng:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/custom-webpack:karma",
           "options": {
             "polyfills": [
               "zone.js",
